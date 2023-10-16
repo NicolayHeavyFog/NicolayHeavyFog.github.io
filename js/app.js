@@ -6098,7 +6098,7 @@
                     animation.frameTween = gsapWithCSS.to(playhead, {
                         frame: animation.totalFrames - 1,
                         ease: "none",
-                        onUpdate: () => animation.goToAndStop(playhead.frame, true),
+                        onUpdate: () => vars.mobile ? animation.play() : animation.goToAndStop(playhead.frame, true),
                         scrollTrigger: st
                     });
                     return () => animation.destroy && animation.destroy();
@@ -6122,7 +6122,8 @@
                         pinSpacing: true,
                         path: "./files/lottie/data.json",
                         speed: "slow",
-                        scrub: 10
+                        scrub: 10,
+                        mobile: false
                     })
                 });
                 tl.fromTo(".header__body", {
@@ -6164,9 +6165,9 @@
                     });
                     window.addEventListener("DOMContentLoaded", (() => resolve(firstAnim)));
                 }));
-                promise.then((anim => anim.play()));
                 let tl = gsapWithCSS.timeline({
                     onComplete: () => {
+                        promise.then((anim => anim.play()));
                         function parseString(index) {
                             return index < 10 ? `0${index}` : index;
                         }
@@ -6185,7 +6186,9 @@
                                     pinSpacing: true,
                                     path: `./files/lottie/data-${parseString(actualIndex)}.json`,
                                     speed: "medium",
-                                    scrub: 3
+                                    scrub: 3,
+                                    mobile: true,
+                                    markers: true
                                 });
                             }));
                             if (counter === 9) clearInterval(internal);
