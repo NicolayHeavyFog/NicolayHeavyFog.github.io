@@ -6165,9 +6165,9 @@
                     });
                     window.addEventListener("DOMContentLoaded", (() => resolve(firstAnim)));
                 }));
+                promise.then((anim => anim.play()));
                 let tl = gsapWithCSS.timeline({
                     onComplete: () => {
-                        promise.then((anim => anim.play()));
                         function parseString(index) {
                             return index < 10 ? `0${index}` : index;
                         }
@@ -6176,7 +6176,6 @@
                             counter += 1;
                             const actualIndex = counter + 1;
                             requestAnimationFrame((() => {
-                                console.log(`#animation-mobile-${actualIndex}`, sections[counter], actualIndex);
                                 LottieScrollTrigger({
                                     target: `#animation-mobile-${counter}`,
                                     trigger: sections[counter],
@@ -6187,24 +6186,23 @@
                                     path: `./files/lottie/data-${parseString(actualIndex)}.json`,
                                     speed: "medium",
                                     scrub: 3,
-                                    mobile: true,
-                                    markers: true
+                                    mobile: true
                                 });
                             }));
                             if (counter === 9) clearInterval(internal);
                         }), 50);
                     }
                 });
-                tl.fromTo(".header__body", {
+                tl.fromTo(".start", {
                     opacity: 0,
-                    y: "-150px"
+                    y: "100px"
                 }, {
                     opacity: 1,
                     y: 0,
                     duration: 1
-                }).fromTo(".start", {
+                }).fromTo(".header__body", {
                     opacity: 0,
-                    y: "100px"
+                    y: "-150px"
                 }, {
                     opacity: 1,
                     y: 0,
