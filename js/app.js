@@ -6193,16 +6193,16 @@
                         }), 50);
                     }
                 });
-                tl.fromTo(".start", {
+                tl.fromTo(".header__body", {
                     opacity: 0,
-                    y: "100px"
+                    y: "-150px"
                 }, {
                     opacity: 1,
                     y: 0,
                     duration: 1
-                }).fromTo(".header__body", {
+                }).fromTo(".start", {
                     opacity: 0,
-                    y: "-150px"
+                    y: "100px"
                 }, {
                     opacity: 1,
                     y: 0,
@@ -6211,6 +6211,10 @@
             }
         }
         document.addEventListener("DOMContentLoaded", (() => {
+            [ 9, 12, 28, 29, 30, 31, 32, 33, 34 ].forEach((number => {
+                const img = document.createElement("img");
+                img.src = `files/lottie/images/img_${number}.png`;
+            }));
             initLottie();
         }));
         class DynamicAdapt {
